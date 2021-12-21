@@ -1,0 +1,78 @@
+digraph DNS {
+    graph [
+        rankdir = TR;
+        compound = true;
+        fontname = "Monospace"
+        pad = "0.5"
+        ranksep = "0.5"
+        nodesep = "2"
+        splines = ortho;
+        bgcolor = black;
+    ];
+    edge [
+        fontname = "Monospace"
+        arrowhead = open
+        fontcolor = white;
+        color = white;
+    ];
+    node [
+        shape = "box"
+        style = "filled, rounded"
+        fillcolor = 4
+        colorscheme = pastel16
+        fontname = "Monospace"
+    ] Start, nothing
+    // Condition
+    node [
+        shape = "diamond"
+        style = "filled"
+        fillcolor = 6
+        colorscheme = pastel16
+        fontname = "Monospace"
+        fixedsize = true
+        width = 2
+        height = 1.6
+    ]; anonymous, censorship, privacy, obnoxious, ispDNS
+    // Process
+    node [
+        shape = "record"
+        fillcolor= 2
+        colorscheme = pastel16
+        style="rounded,filled"
+        fontname = "Monospace"
+        fixedsize = true
+        width = 1.8
+        height = 1
+    ]; tor, vpnOrTor, encryptedDNS, ispDNS, useISP
+
+    // Labels
+    anonymous [label="Trying to be\n anonymous?"]
+    censorship [label="Avoiding\n censorship?"]
+    privacy [label="Want privacy\n from ISP?"]
+    ispDNS [label="Does ISP\n support\n encrypted\n DNS?"]
+    tor [label="Use Tor"];
+    vpnOrTor [label="Use VPN\n or Tor"];
+    encryptedDNS [label="Use encrypted\n DNS with 3rd\n party"]
+    obnoxious [label="ISP makes\n obnoxious\n redirects?"]
+    useISP[label="Use encrypted\n DNS with ISP"]
+    nothing[label="Do nothing"]
+
+    // Edges
+    Start -> anonymous;
+    anonymous -> tor [xlabel="Yes"];
+    anonymous -> censorship [xlabel="No"];
+    censorship -> vpnOrTor [xlabel="Yes"];
+    censorship -> privacy [xlabel="No"];
+    privacy -> vpnOrTor [xlabel="Yes"];
+    privacy -> obnoxious [xlabel="No"];
+    obnoxious -> encryptedDNS [xlabel="Yes"];
+    obnoxious -> ispDNS [xlabel="No"];
+    ispDNS -> useISP [xlabel="Yes"];
+    ispDNS -> nothing [xlabel="No"];
+
+    // Rank
+    { rank=same; anonymous, tor; }
+    { rank=same; censorship, vpnOrTor; }
+    { rank=same; obnoxious, encryptedDNS; }
+    { rank=same; ispDNS, useISP; }
+}
