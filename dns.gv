@@ -1,31 +1,30 @@
 digraph DNS {
     graph [
-        rankdir = TR;
-        compound = true;
-        fontname = "Monospace"
+        rankdir = TR
+        compound = true
+        fontname = "monospace"
         pad = "0.5"
         ranksep = "0.5"
         nodesep = "2"
-        splines = ortho;
+        splines = ortho
+        bgcolor="transparent"
     ];
     edge [
-        fontname = "Monospace"
+        fontname = "monospace"
         arrowhead = open
     ];
     node [
         shape = "box"
         style = "filled, rounded"
-        fillcolor = 4
-        colorscheme = pastel16
-        fontname = "Monospace"
+        color = "#d4bbd2"
+        fontname = "monospace"
     ] Start, nothing
     // Condition
     node [
         shape = "diamond"
         style = "filled"
-        fillcolor = 6
-        colorscheme = pastel16
-        fontname = "Monospace"
+        color = "#ffebc2"
+        fontname = "monospace"
         fixedsize = true
         width = 2
         height = 1.6
@@ -33,10 +32,9 @@ digraph DNS {
     // Process
     node [
         shape = "record"
-        fillcolor= 2
-        colorscheme = pastel16
         style="rounded,filled"
-        fontname = "Monospace"
+        color = "#7aa0da"
+        fontname = "monospace"
         fixedsize = true
         width = 1.8
         height = 1
